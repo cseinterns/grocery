@@ -21,7 +21,7 @@ app.listen(8000, function() {
 });
 const orderSchema = new mongoose.Schema({
     date: {
-        type: "date",
+        type: "String",
         required: true
     },
     skuid: {
