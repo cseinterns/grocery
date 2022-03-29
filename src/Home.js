@@ -7,10 +7,8 @@ import './bootstrap.min.css';
 const Home = () => {
 
     const [orderList,setOrderList] = useState([]);
-   // const [buyerOrder,setbuyerOrder] = useState('');
     const [searchProduct,setProduct] = useState('');
     const [searchId,setID] = useState('');
-    const [newOrderList,setNewList] = useState([]);
 
 
     useEffect(() =>{
@@ -55,19 +53,6 @@ const Home = () => {
         );
     };
 
-   const editById = () => {
-        
-        let id = [];
-        orderList.forEach(d => {
-            if(d.select) {
-                id.push(d._id);
-            }
-        });
-        axios.get(`http://localhost:8000/${id}`).then(res => {
-            setNewList(res);
-        });
-    };
-
     orderList.map((d) => {
         return {
             select:false,
@@ -106,6 +91,7 @@ const Home = () => {
                     <thead>
                             <tr>
                                 <th><input type="checkbox" onChange={(event) => {
+                                    
                                     let checked = event.target.checked;
                                     setOrderList(orderList.map((d)=>{
                                         d.select = checked;
@@ -181,71 +167,8 @@ const Home = () => {
             <button className='btn btn-primary' type='submit' onClick={updateOrder}>Submit</button>
             <button className='btn btn-primary' type='submit'>Save Draft</button>
             <a href='/add' className='btn btn-primary'>Add Order</a>
-            <button type='button' className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editModal' onClick={editById}>Edit order</button>
             <button type='submit' className='btn btn-primary' onClick={deleteById}>Delete Order</button>
             <button className='btn btn-primary' type='submit'>Logout</button>
-
-            {/*Edit Modal */}
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Order</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="container">
-                                <form className='form'>
-                                    <div className='col'>
-                                        <label>Date</label>
-                                        <input type="date" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Product Name</label>
-                                        <input type="text" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Origin</label>
-                                        <input type="text" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Price USD($)</label>
-                                        <input type="number" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Store 1 Order</label>
-                                        <input type="number" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Store 2 Order</label>
-                                        <input type="number" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Store 3 Order</label>
-                                        <input type="number" className='form-control'/>
-                                    </div><br/>
-
-                                    <div className='col'>
-                                        <label>Buyer Order</label>
-                                        <input type="number" className='form-control'/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
       );
 }
