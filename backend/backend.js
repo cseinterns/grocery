@@ -71,8 +71,9 @@ app.post("/login",(req,res) => {
     try {
         LoginModel.findOne({email:email},(err,user)=>{
             if(user) {
-                if(password === user.password) {
+                if(bcrypt.compare(password,user.password)) {
                     res.send({message:"login sucess"});
+                    console.log("Login Successful");
                 } else{
                     res.send({message:"wrong credentials"});
                 }
