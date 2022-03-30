@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.use(cors());
@@ -41,17 +41,20 @@ const LoginSchema = new mongoose.Schema({
 });
 const LoginModel = mongoose.model("users",LoginSchema);
 //To register a user
-app.post('/register',(req,res) => {
+app.post('/register',async(req,res) => {
 
     const firstName = req.body.firstName,lastName = req.body.lastName,email = req.body.email,password = req.body.password ;
 
-    const register = new LoginModel({firstName:firstName,
-        lastName:lastName,
-        email:email,
-        password:password
-    });
-
     try {
+        const salt = await bcrypt.genSalt(10);
+        // now we set user password to hashed password
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        const register = new LoginModel({firstName:firstName,
+            lastName:lastName,
+            email:email,
+            password:hashPassword
+        });
         register.save();
         res.status(201).send("User Registered" + register);
         console.log("Registered:"+ register);
