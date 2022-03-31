@@ -56,7 +56,8 @@ app.post('/register',async(req,res) => {
             password:hashPassword
         });
         register.save();
-        res.status(201).send("User Registered" + register);
+        res.status(201);
+        res.send("User Registered" + register);
         console.log("Registered:"+ register);
 
     } catch(error) {
@@ -72,6 +73,7 @@ app.post("/login",(req,res) => {
         LoginModel.findOne({email:email},(err,user)=>{
             if(user) {
                 if(bcrypt.compare(password,user.password)) {
+                    res.status(201);
                     res.send({message:"login sucess"});
                     console.log("Login Successful");
                 } else{
