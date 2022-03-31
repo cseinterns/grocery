@@ -19,6 +19,12 @@ function App() {
               <Route path="/add">
                 <AddOrder/>
               </Route>
+              <Route path='/register'>
+                  <Register/>
+               </Route>
+               <Route path='/login'>
+                  <Login/>
+               </Route>
             </div>
           </Switch>
         </div>
