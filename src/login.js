@@ -11,14 +11,14 @@ const Login = () => {
     const history = useHistory();
 
     const login = () => {
-        try {   
-            axios.post('http://localhost:8000/login',{
+        axios.post('http://localhost:8000/login',{
                 email:email,
                 password:password
-            }, history.push("/") );
-        } catch (error) {
-            alert(error);
-        }
+        }).then((response) => {
+            if(response.status === 201) {
+                history.push("/");
+            }
+        });
     };
 
     return ( 
@@ -44,7 +44,7 @@ const Login = () => {
                 }}/>
             </div>
             
-            <button type='submit' className='btn btn-success' onClick={login}>Login</button>
+            <button type='button' className='btn btn-success' onClick={login}>Login</button>
         </form>
         <a href='/register' className='btn btn-primary'>Click Here to Register</a>
     </div> );
