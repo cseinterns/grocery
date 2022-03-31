@@ -120,7 +120,12 @@ const Home = () => {
             alert(error)
         );
     };
-
+     //Logout
+    const logout = () => {
+        //localStorage.clear();
+        window.location.href = "/login";
+    };
+    
     orderList.map((d) => {
         return {
             select:false,
@@ -236,7 +241,7 @@ const Home = () => {
             <button className='btn btn-primary' type='submit' onClick={generatePdf}>Save Draft</button>
             <a href='/add' className='btn btn-primary'>Add Order</a>
             <button type='submit' className='btn btn-primary' onClick={deleteById}>Delete Order</button>
-            <button className='btn btn-primary' type='submit'>Logout</button>
+            <a href='#' className='btn btn-primary' onClick={logout}>Logout</a>
         </div>
       );
 }
