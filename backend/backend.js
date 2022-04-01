@@ -67,20 +67,19 @@ app.post('/register',async(req,res) => {
 //to login 
 app.post("/login",(req,res) => {
 
-    const {email,password} = req.body;
+    const useremail = req.body.email,password = req.body.password;
 
     try {
-        LoginModel.findOne({email:email},(err,user)=>{
+        LoginModel.findOne({email:useremail},(err,user)=>{
             if(user) {
-                if(bcrypt.compare(password,user.password)) {
+                if(bcrypt.compareSync(password,user.password)) {
                     res.status(201);
                     res.send({message:"login sucess"});
-                    console.log("Login Successful");
                 } else{
                     res.send({message:"wrong credentials"});
                 }
             } else {
-                res.send("not register");
+                res.send("Not registered");
             }
         });
     } catch(error) {
