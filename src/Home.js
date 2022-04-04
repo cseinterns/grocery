@@ -238,7 +238,7 @@ const Home = () => {
             </div>
 
             <button className='btn btn-primary' type='submit' onClick={updateOrder}>Submit</button>
-            <button className='btn btn-primary' type='submit' onClick={generatePdf}>Save Draft</button>
+            <button className='btn btn-primary' type='submit' onClick={generatePdf}>Save PDF</button>
             <a href='/add' className='btn btn-primary'>Add Order</a>
             <button type='submit' className='btn btn-primary' onClick={deleteById}>Delete Order</button>
             <a href='#' className='btn btn-primary' onClick={logout}>Logout</a>
